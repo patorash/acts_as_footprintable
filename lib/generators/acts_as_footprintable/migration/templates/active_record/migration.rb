@@ -2,14 +2,14 @@
 class ActsAsFootprintMigration < ActiveRecord::Migration
   def self.up
     create_table :footprints do |t|
-      t.references :target, :polymorphic => true
-      t.references :user, :polymorphic => true
+      t.references :footprintable, :polymorphic => true
+      t.references :footprinter, :polymorphic => true
       t.timestamps
     end
 
     if ActiveRecord::VERSION::MAJOR < 4
-      add_index :footprints, [:target_id, :target_type]
-      add_index :footprints, [:user_id, :user_type]
+      add_index :footprints, [:footprintable_id, :footprintable_type]
+      add_index :footprints, [:footprinter_id, :footprinter_type]
     end
   end
 

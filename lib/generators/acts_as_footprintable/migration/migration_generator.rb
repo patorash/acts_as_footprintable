@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'rails/generators/migration'
 
-module ActsAsFootprint
+module ActsAsFootprintable
   class MigrationGenerator < Rails::Generators::Base
     include Rails::Generators::Migration
 

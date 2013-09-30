@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'acts_as_footprint/version'
+require 'acts_as_footprintable/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "acts_as_footprint"
-  spec.version       = ActsAsFootprint::VERSION
+  spec.name          = "acts_as_footprintable"
+  spec.version       = ActsAsFootprintable::VERSION
   spec.author        = "patorash"
   spec.email         = "chariderpato@gmail.com"
   spec.description   = %q{TODO: Write a gem description}
   spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = "https://github.com/patorash/acts_as_footprint"
+  spec.homepage      = "https://github.com/patorash/acts_as_footprintable"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
