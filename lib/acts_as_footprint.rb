@@ -1,5 +1,6 @@
-require "acts_as_footprint/version"
+require 'active_record'
+require 'active_support/inflector'
 
 module ActsAsFootprint
-  # Your code goes here...
+
 end
