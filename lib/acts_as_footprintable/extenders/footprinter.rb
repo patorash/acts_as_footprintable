@@ -11,7 +11,7 @@ module ActsAsFootprintable
         include ActsAsFootprintable::Footprinter
 
         class_eval do
-          def self.voter?
+          def self.footprinter?
             true
           end
         end

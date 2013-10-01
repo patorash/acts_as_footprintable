@@ -2,8 +2,9 @@
 module ActsAsFootprintable
   class Footprint < ::ActiveRecord::Base
     if ::ActiveRecord::VERSION::MAJOR < 4
-      attr_accessible :footprinable_id, :footprinable_type,
-                      :footprinter_id,  :footprinter_type
+      attr_accessible :footprintable_id, :footprintable_type,
+                      :footprinter_id,  :footprinter_type,
+                      :footprintable, :footprinter
     end
 
     belongs_to :footprintable, :polymorphic => true
@@ -12,7 +13,7 @@ module ActsAsFootprintable
     scope :for_type, lambda{|klass| where(:footprintable_type => klass)}
     scope :by_type,  lambda{|klass| where(:footprinter_type   => klass)}
 
-    validates :footprinable_id, :presence => true
+    validates :footprintable_id, :presence => true
     validates :footprinter_id, :presence => true
   end
 end

@@ -1,6 +1,7 @@
 # coding: utf-8
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'sqlite3'
+require 'timecop'
 require 'acts_as_footprintable'
 
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
