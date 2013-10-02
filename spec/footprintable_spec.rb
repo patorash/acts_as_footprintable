@@ -4,10 +4,6 @@ require 'spec_helper'
 
 describe ActsAsFootprintable::Footprintable do
 
-  before(:each) do
-    clean_database
-  end
-
   it "should not be a footprintable" do
     NotFootprintable.should_not be_footprintable
   end

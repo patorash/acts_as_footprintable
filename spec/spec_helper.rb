@@ -2,7 +2,20 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 require 'sqlite3'
 require 'timecop'
+require 'database_cleaner'
 require 'acts_as_footprintable'
+
+RSpec.configure do |config|
+  config.before :suite do
+    DatabaseCleaner.strategy = :truncation
+  end
+  config.before :each do
+    DatabaseCleaner.start
+  end
+  config.after :each do
+    DatabaseCleaner.clean
+  end
+end
 
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
 
@@ -48,11 +61,4 @@ end
 
 class NotFootprintable < ActiveRecord::Base
   validates :name, :presence => true
-end
-
-def clean_database
-  models = [ActsAsFootprintable::Footprint, User, NotUser, Footprintable, NotFootprintable]
-  models.each do |model|
-    ActiveRecord::Base.connection.execute "DELETE FROM #{model.table_name}"
-  end
 end

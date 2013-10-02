@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'timecop'
+  spec.add_development_dependency 'database_cleaner', "~> 1.0.1"
 end
