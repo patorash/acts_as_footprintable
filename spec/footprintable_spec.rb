@@ -49,12 +49,6 @@ describe ActsAsFootprintable::Footprintable do
       }.to change{ @footprintable.footprints }.from(0).to(10)
     end
 
-    describe "test" do
-      it "test" do
-        1.should == 1
-      end
-    end
-
     describe "期間指定をする" do
       before do
         (1..30).each do |day|
@@ -79,6 +73,29 @@ describe ActsAsFootprintable::Footprintable do
           end
         end
       end
+    end
+  end
+
+  describe "アクセスランキングを作成" do
+    before do
+      @user  = User.create!(:name => 'i can footprint!')
+    end
+
+    context "件数と期間を制限" do
+      before do
+        (1..30).each do |index|
+          Timecop.travel(Time.parse("2013/9/#{index}")) do
+            footprintable = Footprintable.create!(:name => "Footprintable#{index}")
+            index.times {footprintable.leave_footprints @user}
+          end
+        end
+      end
+      subject do
+        month = Time.new(2013,9,1)
+        Footprintable.access_ranking(month.beginning_of_month...1.week.since(month), 5)
+      end
+      it { should == {7 => 7, 6 => 6, 5 => 5, 4 => 4, 3 => 3 }}
+      it { should have(5).items }
     end
   end
 end

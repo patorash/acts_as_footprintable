@@ -51,7 +51,7 @@ class NotFootprintable < ActiveRecord::Base
 end
 
 def clean_database
-  models = [User, NotUser, Footprintable, NotFootprintable]
+  models = [ActsAsFootprintable::Footprint, User, NotUser, Footprintable, NotFootprintable]
   models.each do |model|
     ActiveRecord::Base.connection.execute "DELETE FROM #{model.table_name}"
   end
