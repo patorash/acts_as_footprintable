@@ -1,4 +1,4 @@
-# ActsAsFootprint
+# ActsAsFootprintable
 
 Acts As Footprintable is a Ruby Gem specifically written for Rails/ActiveRecord models.
 The main goals of this gem are:
