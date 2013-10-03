@@ -21,15 +21,12 @@ module ActsAsFootprintable
       end
     end
 
-    def footprints
-      Footprint.for_type(self.class).where(:footprintable_id => self).count
+    def footprint_count
+      footprints.count
     end
 
-    def footprints_between(range)
-      Footprint.for_type(self.class).where(
-          :footprintable_id => self,
-          :created_at => range
-      ).count
+    def footprint_count_between(range)
+      footprints.where(:created_at => range).count
     end
   end
 end

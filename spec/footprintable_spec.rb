@@ -29,20 +29,20 @@ describe ActsAsFootprintable::Footprintable do
     it "足跡の数が増えていること" do
       expect {
         @footprintable.leave_footprints @user
-      }.to change{ @footprintable.footprints }.from(0).to(1)
+      }.to change{ @footprintable.footprint_count }.from(0).to(1)
     end
 
     it "10回アクセスしたら10になること" do
       expect {
         10.times { @footprintable.leave_footprints @user }
-      }.to change{ @footprintable.footprints }.from(0).to(10)
+      }.to change{ @footprintable.footprint_count }.from(0).to(10)
     end
 
     it "複数人でアクセスしたら合計されること" do
       expect {
         5.times { @footprintable.leave_footprints @user }
         5.times { @footprintable.leave_footprints @user2 }
-      }.to change{ @footprintable.footprints }.from(0).to(10)
+      }.to change{ @footprintable.footprint_count }.from(0).to(10)
     end
 
     describe "期間指定をする" do
@@ -57,7 +57,7 @@ describe ActsAsFootprintable::Footprintable do
       context "1週間の場合" do
         it "35の足跡があること" do
           Timecop.travel(Time.parse("2013/9/30 10:00:00")) do
-            @footprintable.footprints_between(1.week.ago..Time.now).should == 35
+            @footprintable.footprint_count_between(1.week.ago..Time.now).should == 35
           end
         end
       end
@@ -65,7 +65,7 @@ describe ActsAsFootprintable::Footprintable do
       context "1ヶ月の場合" do
         it "150の足跡があること" do
           Timecop.travel(Time.parse("2013/9/30 10:00:00")) do
-            @footprintable.footprints_between(1.month.ago..Time.now).should == 150
+            @footprintable.footprint_count_between(1.month.ago..Time.now).should == 150
           end
         end
       end

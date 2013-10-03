@@ -11,8 +11,13 @@ module ActsAsFootprintable
       end
     end
 
-    def footprint(args)
-      args[:footprintable].footprint args.merge({:footprinter => self})
+    def leave_footprints(footprintable)
+      footprint = ActsAsFootprintable::Footprint.new(:footprintable => footprintable, :footprinter => self)
+      if footprint.save
+        true
+      else
+        false
+      end
     end
 
     def access_histories_for(klass, limit=nil)

@@ -6,10 +6,10 @@ require 'acts_as_footprintable/version'
 Gem::Specification.new do |spec|
   spec.name          = "acts_as_footprintable"
   spec.version       = ActsAsFootprintable::VERSION
-  spec.author        = "patorash"
+  spec.author        = "Toyoaki Oko"
   spec.email         = "chariderpato@gmail.com"
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Rails gem to allowing records to leave footprints}
+  spec.summary       = %q{Rails gem to allowing records to leave footprints}
   spec.homepage      = "https://github.com/patorash/acts_as_footprintable"
   spec.license       = "MIT"
 
