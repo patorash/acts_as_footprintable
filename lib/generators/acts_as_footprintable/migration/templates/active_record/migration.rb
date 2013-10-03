@@ -1,5 +1,5 @@
 # coding: utf-8
-class ActsAsFootprintMigration < ActiveRecord::Migration
+class ActsAsFootprintableMigration < ActiveRecord::Migration
   def self.up
     create_table :footprints do |t|
       t.references :footprintable, :polymorphic => true
