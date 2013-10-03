@@ -15,7 +15,7 @@ The main goals of this gem are:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'acts_as_footprint', '~> 0.0.1'
+gem 'acts_as_footprintable', '~> 0.0.1'
 ```
 
 And then execute:
@@ -24,7 +24,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install acts_as_footprint
+    $ gem install acts_as_footprintable
 
 ### Database Migrations
 
