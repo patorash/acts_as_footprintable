@@ -16,7 +16,11 @@ describe ActsAsFootprintable::Footprinter do
       @user = User.create!(:name => "user")
       (1..5).each do |index|
         footprintable = Footprintable.create!(:name => "footprintable#{index}")
-        3.times { footprintable.leave_footprints @user }
+        second_footprintable = SecondFootprintable.create!(:name => "second_footprintable#{index}")
+        3.times do
+          footprintable.leave_footprints @user
+          second_footprintable.leave_footprints @user
+        end
       end
     end
 
@@ -32,7 +36,18 @@ describe ActsAsFootprintable::Footprinter do
     end
 
     context "全てのモデルを通じて" do
-      it "取得できること"
+      it "取得できること" do
+        @user.access_histories.should have(10).items
+        @user.access_histories.map{|footprintable| footprintable.name}.should == (1..5).to_a.reverse.inject([]) do |results, index|
+          results.push "second_footprintable#{index}"
+          results.push "footprintable#{index}"
+          results
+        end
+      end
+
+      it "件数を絞り込める事" do
+        @user.access_histories(3).should have(3).items
+      end
     end
   end
 end

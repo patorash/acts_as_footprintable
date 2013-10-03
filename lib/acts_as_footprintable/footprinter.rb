@@ -16,9 +16,21 @@ module ActsAsFootprintable
     end
 
     def access_histories_for(klass, limit=nil)
-      records = footprints.for_type(klass).
-          includes(klass.table_name.singularize).
-          order("footprints.created_at desc").select("DISTINCT footprintable_id, footprintable_type")
+      get_access_history_records(limit, klass) do
+        footprints.for_type(klass).group('footprintable_id').having('MAX(created_at)').pluck(:id)
+      end
+    end
+
+    def access_histories(limit=nil)
+      get_access_history_records(limit) do
+        footprints.group('footprintable_id, footprintable_type').having('MAX(created_at)').pluck(:id)
+      end
+    end
+
+    private
+    def get_access_history_records(limit=nil, klass=nil)
+      records = footprints.where(:id => yield).order("footprints.created_at desc")
+      records = records.includes(klass.table_name.singularize) unless klass.nil?
       records = records.limit(limit) unless limit.nil?
       records.map{|footprint| footprint.footprintable}
     end

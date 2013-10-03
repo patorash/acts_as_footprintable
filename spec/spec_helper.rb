@@ -41,6 +41,10 @@ ActiveRecord::Schema.define(:version => 1) do
     t.string :name
   end
 
+  create_table :second_footprintables do |t|
+    t.string :name
+  end
+
   create_table :not_footprintables do |t|
     t.string :name
   end
@@ -55,6 +59,11 @@ class NotUser < ActiveRecord::Base
 end
 
 class Footprintable < ActiveRecord::Base
+  acts_as_footprintable
+  validates :name, :presence => true
+end
+
+class SecondFootprintable < ActiveRecord::Base
   acts_as_footprintable
   validates :name, :presence => true
 end
