@@ -21,7 +21,7 @@ module ActsAsFootprintable
     end
 
     def access_histories_for(klass, limit=nil)
-      get_access_history_records(limit, klass) do
+      get_access_history_records(limit) do
         footprints.for_type(klass).group('footprintable_id').having('MAX(created_at)').pluck(:id)
       end
     end
@@ -33,9 +33,8 @@ module ActsAsFootprintable
     end
 
     private
-    def get_access_history_records(limit=nil, klass=nil)
+    def get_access_history_records(limit=nil)
       records = footprints.where(:id => yield).order("footprints.created_at desc")
-      records = records.includes(klass.table_name.singularize) unless klass.nil?
       records = records.limit(limit) unless limit.nil?
       records.map{|footprint| footprint.footprintable}
     end
