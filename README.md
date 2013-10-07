@@ -1,4 +1,5 @@
 # ActsAsFootprintable
+[![Build Status](https://travis-ci.org/patorash/acts_as_footprintable.png)](https://travis-ci.org/acts_as_footprintable/acts_as_footprintable)
 
 Acts As Footprintable is a Ruby Gem specifically written for Rails/ActiveRecord models.
 The main goals of this gem are:
