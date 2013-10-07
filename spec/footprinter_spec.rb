@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'acts_as_footprintable'
 require 'spec_helper'
 
