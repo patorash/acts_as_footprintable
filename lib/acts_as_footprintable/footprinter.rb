@@ -21,22 +21,29 @@ module ActsAsFootprintable
     end
 
     def access_histories_for(klass, limit=nil)
-      get_access_history_records(limit) do
-        footprints.for_type(klass).group('footprintable_id').having('MAX(created_at)').pluck(:id)
-      end
+      get_access_history_records(footprints.for_type(klass), limit)
     end
 
     def access_histories(limit=nil)
-      get_access_history_records(limit) do
-        footprints.group('footprintable_id, footprintable_type').having('MAX(created_at)').pluck(:id)
-      end
+      get_access_history_records(footprints, limit)
     end
 
     private
-    def get_access_history_records(limit=nil)
-      records = footprints.where(:id => yield).order("footprints.created_at desc")
-      records = records.limit(limit) unless limit.nil?
+    def get_access_history_records(target, limit=nil)
+      records = footprints.where(:id => recent_footprint_ids(target, limit)).order("footprints.created_at desc")
       records.map{|footprint| footprint.footprintable}
+    end
+
+    def table_name
+      ActsAsFootprintable::Footprint.table_name
+    end
+
+    def recent_footprint_ids(target, limit=nil)
+      recent_footprints = target.group("#{table_name}.footprintable_id, #{table_name}.footprintable_type").
+          select("#{table_name}.footprintable_id, #{table_name}.footprintable_type, MAX(#{table_name}.created_at)")
+      records = footprints.where("(#{table_name}.footprintable_id, #{table_name}.footprintable_type, #{table_name}.created_at) IN (#{recent_footprints.arel.to_sql})")
+      records = records.limit(limit) unless limit.nil?
+      records.pluck(:id)
     end
   end
 end

@@ -1,11 +1,17 @@
-# coding: utf-8
-$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
-require 'sqlite3'
-require 'timecop'
-require 'database_cleaner'
-require 'acts_as_footprintable'
+## coding: utf-8
+require 'rubygems'
+require 'bundler'
+require 'active_support/dependencies'
+
+Bundler.require :default, :development
+
+Combustion.initialize! :active_record
 
 RSpec.configure do |config|
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.run_all_when_everything_filtered = true
+  config.filter_run :focus
+
   config.before :suite do
     DatabaseCleaner.strategy = :truncation
   end
@@ -15,59 +21,4 @@ RSpec.configure do |config|
   config.after :each do
     DatabaseCleaner.clean
   end
-end
-
-ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
-
-ActiveRecord::Schema.define(:version => 1) do
-  create_table :footprints do |t|
-    t.references :footprintable, :polymorphic => true
-    t.references :footprinter, :polymorphic => true
-    t.timestamps
-  end
-
-  add_index :footprints, [:footprintable_id, :footprintable_type]
-  add_index :footprints, [:footprinter_id, :footprinter_type]
-
-  create_table :users do |t|
-    t.string :name
-  end
-
-  create_table :not_users do |t|
-    t.string :name
-  end
-
-  create_table :footprintables do |t|
-    t.string :name
-  end
-
-  create_table :second_footprintables do |t|
-    t.string :name
-  end
-
-  create_table :not_footprintables do |t|
-    t.string :name
-  end
-end
-
-class User < ActiveRecord::Base
-  acts_as_footprinter
-end
-
-class NotUser < ActiveRecord::Base
-
-end
-
-class Footprintable < ActiveRecord::Base
-  acts_as_footprintable
-  validates :name, :presence => true
-end
-
-class SecondFootprintable < ActiveRecord::Base
-  acts_as_footprintable
-  validates :name, :presence => true
-end
-
-class NotFootprintable < ActiveRecord::Base
-  validates :name, :presence => true
 end
