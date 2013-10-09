@@ -30,8 +30,7 @@ module ActsAsFootprintable
 
     private
     def get_access_history_records(target, limit=nil)
-      records = footprints.where(:id => recent_footprint_ids(target, limit)).order("footprints.created_at desc")
-      records.map{|footprint| footprint.footprintable}
+      footprints.where(:id => recent_footprint_ids(target, limit)).order("footprints.created_at desc")
     end
 
     def table_name

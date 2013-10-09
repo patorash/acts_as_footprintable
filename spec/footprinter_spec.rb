@@ -27,7 +27,7 @@ describe ActsAsFootprintable::Footprinter do
     context "対象のモデル毎に" do
       it "取得できること" do
         @user.access_histories_for(Footprintable).should have(5).items
-        @user.access_histories_for(Footprintable).map{|footprintable| footprintable.name}.should == (1..5).to_a.reverse.map{|index| "footprintable#{index}"}
+        @user.access_histories_for(Footprintable).map{|footprint| footprint.footprintable.name}.should == (1..5).to_a.reverse.map{|index| "footprintable#{index}"}
       end
 
       it "件数を絞り込めること" do
@@ -38,7 +38,7 @@ describe ActsAsFootprintable::Footprinter do
     context "全てのモデルを通じて" do
       it "取得できること" do
         @user.access_histories.should have(10).items
-        @user.access_histories.map{|footprintable| footprintable.name}.should == (1..5).to_a.reverse.inject([]) do |results, index|
+        @user.access_histories.map{|footprint| footprint.footprintable.name}.should == (1..5).to_a.reverse.inject([]) do |results, index|
           results.push "second_footprintable#{index}"
           results.push "footprintable#{index}"
           results
