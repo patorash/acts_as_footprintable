@@ -1,9 +1,9 @@
 ## coding: utf-8
 require 'rubygems'
-require 'bundler'
-require 'active_support/dependencies'
-
-Bundler.require :default, :development
+require 'bundler/setup'
+require 'combustion'
+require 'database_cleaner'
+require 'timecop'
 
 Combustion.initialize! :active_record
 
