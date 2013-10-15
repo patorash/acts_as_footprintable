@@ -16,3 +16,6 @@ rails = case rails_version
         end
 
 gem 'rails', rails
+group :development do
+  gem 'combustion', github: 'patorash/combustion', branch: 'master'
+end
