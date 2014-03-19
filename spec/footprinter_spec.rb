@@ -33,6 +33,7 @@ describe ActsAsFootprintable::Footprinter do
 
       it "件数を絞り込めること" do
         @user.access_histories_for(Footprintable, 3).should have(3).items
+        @user.access_histories_for(Footprintable, 3).map{|footprint| footprint.footprintable.name}.should == (3..5).to_a.reverse.map{|index| "footprintable#{index}"}
       end
     end
 
