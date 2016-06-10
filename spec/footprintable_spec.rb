@@ -4,11 +4,11 @@ require 'spec_helper'
 describe ActsAsFootprintable::Footprintable do
 
   it "should not be a footprintable" do
-    NotFootprintable.should_not be_footprintable
+    expect(NotFootprintable).not_to be_footprintable
   end
 
   it "should be a footprintable" do
-    Footprintable.should be_footprintable
+    expect(Footprintable).to be_footprintable
   end
 
   describe 'leave footprints by footprinter' do
@@ -22,7 +22,7 @@ describe ActsAsFootprintable::Footprintable do
     end
 
     it "should be leave footprints" do
-      @footprintable.leave_footprints(@user).should be_true
+      expect(@footprintable.leave_footprints(@user)).to be_truthy
     end
 
     it "足跡の数が増えていること" do
@@ -56,7 +56,7 @@ describe ActsAsFootprintable::Footprintable do
       context "1週間の場合" do
         it "35の足跡があること" do
           Timecop.travel(Time.parse("2013/9/30 10:00:00")) do
-            @footprintable.footprint_count_between(1.week.ago..Time.now).should == 35
+            expect(@footprintable.footprint_count_between(1.week.ago..Time.now)).to eq 35
           end
         end
       end
@@ -64,7 +64,7 @@ describe ActsAsFootprintable::Footprintable do
       context "1ヶ月の場合" do
         it "150の足跡があること" do
           Timecop.travel(Time.parse("2013/9/30 10:00:00")) do
-            @footprintable.footprint_count_between(1.month.ago..Time.now).should == 150
+            expect(@footprintable.footprint_count_between(1.month.ago..Time.now)).to eq 150
           end
         end
       end
@@ -89,8 +89,10 @@ describe ActsAsFootprintable::Footprintable do
         month = Time.new(2013,9,1)
         Footprintable.access_ranking(month.beginning_of_month...1.week.since(month), 5)
       end
-      it { should == {7 => 7, 6 => 6, 5 => 5, 4 => 4, 3 => 3 }}
-      it { should have(5).items }
+      it { is_expected.to eq ({7 => 7, 6 => 6, 5 => 5, 4 => 4, 3 => 3 }) }
+      it '5件取得できること' do
+        expect(subject.count).to eq 5
+      end
     end
   end
 end
