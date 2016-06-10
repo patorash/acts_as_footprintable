@@ -4,7 +4,7 @@ class ActsAsFootprintableMigration < ActiveRecord::Migration
     create_table :footprints do |t|
       t.references :footprintable, :polymorphic => true
       t.references :footprinter, :polymorphic => true
-      t.timestamps
+      t.timestamps :null => false
     end
 
     if ActiveRecord::VERSION::MAJOR < 4
