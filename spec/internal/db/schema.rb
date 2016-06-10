@@ -3,7 +3,7 @@ ActiveRecord::Schema.define do
   create_table :footprints, :force => true do |t|
     t.references :footprintable, :polymorphic => true
     t.references :footprinter, :polymorphic => true
-    t.timestamps
+    t.timestamps :null => false
   end
 
   add_index :footprints, [:footprintable_id, :footprintable_type]
