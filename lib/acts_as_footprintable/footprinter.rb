@@ -43,7 +43,7 @@ module ActsAsFootprintable
       records = footprints.where("(#{table_name}.footprintable_id, #{table_name}.footprintable_type, #{table_name}.created_at) IN (#{recent_footprints.arel.to_sql})")
       records = records.order("footprints.created_at desc")
       records = records.limit(limit) unless limit.nil?
-      records.pluck(:id)
+      records.select(:id)
     end
   end
 end
