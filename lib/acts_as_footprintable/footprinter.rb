@@ -30,7 +30,7 @@ module ActsAsFootprintable
 
     private
     def get_access_history_records(target, limit=nil)
-      footprints.where(:id => recent_footprint_ids(target, limit)).order("footprints.created_at desc")
+      footprints.where(:id => recent_footprint_ids(target, limit))
     end
 
     def table_name
@@ -41,6 +41,7 @@ module ActsAsFootprintable
       recent_footprints = target.group("#{table_name}.footprintable_id, #{table_name}.footprintable_type").
           select("#{table_name}.footprintable_id, #{table_name}.footprintable_type, MAX(#{table_name}.created_at)")
       records = footprints.where("(#{table_name}.footprintable_id, #{table_name}.footprintable_type, #{table_name}.created_at) IN (#{recent_footprints.arel.to_sql})")
+      records = records.order("footprints.created_at desc")
       records = records.limit(limit) unless limit.nil?
       records.pluck(:id)
     end
