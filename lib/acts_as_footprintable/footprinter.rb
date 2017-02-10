@@ -39,8 +39,13 @@ module ActsAsFootprintable
 
     def recent_footprint_ids(target, limit=nil)
       recent_footprints = target.group("#{table_name}.footprintable_id, #{table_name}.footprintable_type").
-          select("#{table_name}.footprintable_id, #{table_name}.footprintable_type, MAX(#{table_name}.created_at)")
-      records = footprints.where("(#{table_name}.footprintable_id, #{table_name}.footprintable_type, #{table_name}.created_at) IN (#{recent_footprints.arel.to_sql})")
+          select("#{table_name}.footprintable_id, #{table_name}.footprintable_type, MAX(#{table_name}.created_at) AS created_at")
+      recent_footprints_conditions = recent_footprints.map{ |recent_footprint| recent_footprint.attributes.select{ |_, v| !v.nil?} }
+      columns = recent_footprints_conditions.first.keys.map{|column| "#{table_name}.#{column}" }.join(',')
+      values = recent_footprints_conditions.map { |row|
+        "(#{row.values.map{|value| ActiveRecord::Base::sanitize(value)}.join(',')})"
+      }.join(',')
+      records = footprints.where("(#{columns}) IN (#{values})")
       records = records.order("footprints.created_at desc")
       records = records.limit(limit) unless limit.nil?
       records.pluck(:id)
