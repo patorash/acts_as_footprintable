@@ -5,7 +5,6 @@ source 'https://rubygems.org'
 gemspec
 
 rails_version = ENV['RAILS_VERSION'] || 'default'
-
 rails = case rails_version
           when 'master'
             { :github => 'rails/rails' }
@@ -17,5 +16,5 @@ rails = case rails_version
 
 gem 'rails', rails
 group :development do
-  gem 'combustion', github: 'patorash/combustion', branch: 'master'
+  gem 'combustion', '~> 0.5'
 end
