@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'combustion'
 require 'database_cleaner'
 require 'timecop'
+require 'pry'
 
 Combustion.initialize! :active_record
 
