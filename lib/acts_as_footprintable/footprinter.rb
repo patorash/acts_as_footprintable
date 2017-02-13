@@ -41,6 +41,8 @@ module ActsAsFootprintable
       recent_footprints = target.group("#{table_name}.footprintable_id, #{table_name}.footprintable_type").
           select("#{table_name}.footprintable_id, #{table_name}.footprintable_type, MAX(#{table_name}.created_at) AS created_at")
       recent_footprints_conditions = recent_footprints.map{ |recent_footprint| recent_footprint.attributes.select{ |_, v| !v.nil?} }
+      return [] if recent_footprints_conditions.first.nil?
+
       columns = recent_footprints_conditions.first.keys.map{|column| "#{table_name}.#{column}" }.join(',')
       values = recent_footprints_conditions.map { |row|
         "(#{row.values.map{|value| ActiveRecord::Base::sanitize(value)}.join(',')})"
