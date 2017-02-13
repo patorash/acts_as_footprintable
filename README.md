@@ -16,7 +16,7 @@ The main goals of this gem are:
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'acts_as_footprintable', '~> 0.1.0'
+gem 'acts_as_footprintable', '~> 0.3.1'
 ```
 
 And then execute:
