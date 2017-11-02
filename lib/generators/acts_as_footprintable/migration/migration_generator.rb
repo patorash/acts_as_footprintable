@@ -25,8 +25,18 @@ module ActsAsFootprintable
 
     def create_migration_file
       if self.class.orm_has_migration?
-        migration_template 'migration.rb', 'db/migrate/acts_as_footprintable_migration.rb'
+        migration_template 'migration.rb', 'db/migrate/acts_as_footprintable_migration.rb', migration_version: migration_version
       end
+    end
+
+    def migration_version
+      if rails5?
+        "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
+      end
+    end
+
+    def rails5?
+      Rails.version.start_with? '5'
     end
   end
 end
