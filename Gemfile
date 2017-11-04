@@ -15,6 +15,13 @@ rails = case rails_version
         end
 
 gem 'rails', rails
+
+combustion = case rails
+               when '~> 3.2.0'
+                 '~> 0.3.3'
+               else
+                 '~> 0.5'
+             end
 group :development do
-  gem 'combustion', '~> 0.5'
+  gem 'combustion', combustion
 end
