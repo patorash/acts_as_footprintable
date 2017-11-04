@@ -1,5 +1,6 @@
 # coding: utf-8
 require 'spec_helper'
+require 'acts_as_footprintable/footprintable'
 
 describe ActsAsFootprintable::Footprintable do
 
