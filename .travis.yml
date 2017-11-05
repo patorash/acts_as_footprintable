@@ -1,17 +1,16 @@
 language: ruby
 rvm:
   - 2.4.2
-  - 2.3.4
-  - 2.2.7
+  - 2.3.5
+  - 2.2.8
   - 2.1.10
-env:
-  - "RAILS_VERSION=5.1.4"
-  - "RAILS_VERSION=5.0.0"
-  - "RAILS_VERSION=4.2.8"
-  - "RAILS_VERSION=4.2.0"
-  - "RAILS_VERSION=4.1.0"
-  - "RAILS_VERSION=4.0.0"
-  - "RAILS_VERSION=3.2.0"
+gemfile:
+  - gemfiles/rails_5_1.gemfile
+  - gemfiles/rails_5_0.gemfile
+  - gemfiles/rails_4_2.gemfile
+  - gemfiles/rails_4_1.gemfile
+  - gemfiles/rails_4_0.gemfile
+  - gemfiles/rails_3_2.gemfile
 branches:
   only:
     - master
@@ -19,15 +18,15 @@ branches:
 
 matrix:
   exclude:
+    # NOTE: rails 5.x requires Ruby version >= 2.2.2
     - rvm: 2.1.10
-      env: "RAILS_VERSION=5.1.4"
+      gemfile: gemfiles/rails_5_1.gemfile
     - rvm: 2.1.10
-      env: "RAILS_VERSION=5.0.0"
+      gemfile: gemfiles/rails_5_0.gemfile
+    # NOTE: rails 4.2.8 is the first release with Ruby 2.4 support
     - rvm: 2.4.2
-      env: "RAILS_VERSION=4.2.0"
+      gemfile: gemfiles/rails_4_1.gemfile
     - rvm: 2.4.2
-      env: "RAILS_VERSION=4.1.0"
+      gemfile: gemfiles/rails_4_0.gemfile
     - rvm: 2.4.2
-      env: "RAILS_VERSION=4.0.0"
-    - rvm: 2.4.2
-      env: "RAILS_VERSION=3.2.0"
+      gemfile: gemfiles/rails_3_2.gemfile
