@@ -14,3 +14,8 @@ branches:
   only:
     - master
     - travis
+
+matrix:
+  exclude:
+    - rvm: 2.1.10
+      env: "RAILS_VERSION=5.0.0"
