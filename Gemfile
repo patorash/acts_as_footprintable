@@ -15,6 +15,7 @@ rails = case rails_version
         end
 
 gem 'rails', rails
+
 group :development do
   if rails_version == 'default' ||
       (Gem::Version.correct?(rails_version) && Gem::Version.new(rails_version) < Gem::Version.new("4.0.0"))
