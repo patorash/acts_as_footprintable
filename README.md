@@ -11,12 +11,12 @@ The main goals of this gem are:
 
 ## Installation
 
-### Rails 3.2 and 4.0+
+### Rails 3.2, 4.x and 5.x
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'acts_as_footprintable', '~> 0.4.0'
+gem 'acts_as_footprintable', '~> 0.5.0'
 ```
 
 And then execute:
