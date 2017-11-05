@@ -16,5 +16,16 @@ rails = case rails_version
 
 gem 'rails', rails
 group :development do
-  gem 'combustion', '~> 0.5'
+  if rails_version == 'default' ||
+      (Gem::Version.correct?(rails_version) && Gem::Version.new(rails_version) < Gem::Version.new("4.0.0"))
+    # rails < 4 needs combustion v0.5.2 (does not work with v0.5.3)
+    # An error occurred while loading ./spec/footprinter_spec.rb.
+    # Failure/Error: Combustion.initialize! :active_record
+    #
+    # PG::ConnectionBad:
+    #   FATAL:  database "acts_as_footprintable" does not exist
+    gem 'combustion', "0.5.2"
+  else
+    gem 'combustion'
+  end
 end
