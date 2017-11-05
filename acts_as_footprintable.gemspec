@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'timecop', '~> 0'
   spec.add_development_dependency 'database_cleaner', '~> 1.0', '>= 1.0.1'
   spec.add_development_dependency 'pry', '~> 0'
+  spec.add_development_dependency 'combustion'
 end
