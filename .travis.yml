@@ -1,10 +1,11 @@
 language: ruby
 rvm:
-  - 2.4.0
-  - 2.3.3
-  - 2.2.6
+  - 2.4.2
+  - 2.3.4
+  - 2.2.7
   - 2.1.10
 env:
+  - "RAILS_VERSION=5.1.4"
   - "RAILS_VERSION=5.0.0"
   - "RAILS_VERSION=4.2.8"
   - "RAILS_VERSION=4.2.0"
@@ -19,12 +20,14 @@ branches:
 matrix:
   exclude:
     - rvm: 2.1.10
+      env: "RAILS_VERSION=5.1.4"
+    - rvm: 2.1.10
       env: "RAILS_VERSION=5.0.0"
-    - rvm: 2.4.0
+    - rvm: 2.4.2
       env: "RAILS_VERSION=4.2.0"
-    - rvm: 2.4.0
+    - rvm: 2.4.2
       env: "RAILS_VERSION=4.1.0"
-    - rvm: 2.4.0
+    - rvm: 2.4.2
       env: "RAILS_VERSION=4.0.0"
-    - rvm: 2.4.0
+    - rvm: 2.4.2
       env: "RAILS_VERSION=3.2.0"
