@@ -20,3 +20,4 @@ test/version_tmp
 tmp
 *.log
 gemfiles/*.gemfile.lock
+.rspec_status
