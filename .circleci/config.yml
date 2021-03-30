@@ -179,7 +179,7 @@ workflows:
           ruby_version:  '2.6.6'
           rails_version: '6.0'
       - test:
-          name: 'Ruby 2.7.2-Rails 6.1'
+          name: 'Ruby 2.7.2-Rails 6.0'
           ruby_version:  '2.7.2'
           rails_version: '6.1'
       - test:
