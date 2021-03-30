@@ -1,5 +1,7 @@
 test:
   adapter: postgresql
   encoding: unicode
+  user: postgres
+  host: localhost
   database: acts_as_footprintable
   min_messages: WARNING

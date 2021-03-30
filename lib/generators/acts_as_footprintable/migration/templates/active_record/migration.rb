@@ -1,10 +1,9 @@
-# coding: utf-8
 class ActsAsFootprintableMigration < ActiveRecord::Migration<%= migration_version %>
   def self.up
     create_table :footprints do |t|
-      t.references :footprintable, :polymorphic => true
-      t.references :footprinter, :polymorphic => true
-      t.timestamps :null => false
+      t.references :footprintable, polymorphic: true
+      t.references :footprinter, polymorphic: true
+      t.timestamps null: false
     end
 
     if ActiveRecord::VERSION::MAJOR < 4

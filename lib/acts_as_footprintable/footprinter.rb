@@ -1,9 +1,8 @@
-# coding: utf-8
 module ActsAsFootprintable
   module Footprinter
     def self.included(base)
       base.class_eval do
-        has_many :footprints, :class_name => 'ActsAsFootprintable::Footprint', :as => :footprinter, :dependent => :destroy do
+        has_many :footprints, class_name: 'ActsAsFootprintable::Footprint', as: :footprinter, dependent: :destroy do
           def footprintable
             includes(:footprintable).map(&:footprintable)
           end
@@ -12,12 +11,8 @@ module ActsAsFootprintable
     end
 
     def leave_footprints(footprintable)
-      footprint = ActsAsFootprintable::Footprint.new(:footprintable => footprintable, :footprinter => self)
-      if footprint.save
-        true
-      else
-        false
-      end
+      footprint = ActsAsFootprintable::Footprint.new(footprintable: footprintable, footprinter: self)
+      footprint.save
     end
 
     def access_histories_for(klass, limit=nil)
@@ -30,7 +25,7 @@ module ActsAsFootprintable
 
     private
     def get_access_history_records(target, limit=nil)
-      footprints.where(:id => recent_footprint_ids(target, limit)).order("created_at DESC")
+      footprints.where(id: recent_footprint_ids(target, limit)).order("created_at DESC")
     end
 
     def table_name
