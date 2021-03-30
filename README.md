@@ -1,5 +1,5 @@
 # ActsAsFootprintable
-[![Build Status](https://travis-ci.org/patorash/acts_as_footprintable.png)](https://travis-ci.org/patorash/acts_as_footprintable)
+[![patorash](https://circleci.com/gh/patorash/acts_as_footprintable.svg?style=svg)](https://circleci.com/gh/patorash/acts_as_footprintable)
 
 Acts As Footprintable is a Ruby Gem specifically written for Rails/ActiveRecord models.
 The main goals of this gem are:
@@ -11,12 +11,12 @@ The main goals of this gem are:
 
 ## Installation
 
-### Rails 3.2, 4.x and 5.x
+### Rails 5.x and 6.x
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'acts_as_footprintable', '~> 0.5.0'
+gem 'acts_as_footprintable', '~> 0.6.0'
 ```
 
 And then execute:
@@ -44,7 +44,7 @@ class Post < ActiveRecord::Base
   acts_as_footprintable
 end
 
-@post = Post.create(:name => 'my post!')
+@post = Post.create(name: 'my post!')
 
 @post.leave_footprints @user
 @post.footprints.size # => 1
