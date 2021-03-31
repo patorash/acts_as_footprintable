@@ -21,3 +21,4 @@ tmp
 *.log
 gemfiles/*.gemfile.lock
 .rspec_status
+*.sqlite3

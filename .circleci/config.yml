@@ -10,7 +10,6 @@ executors:
     working_directory: ~/repo
     docker:
       - image: circleci/ruby:<< parameters.ruby_version >>-node-browsers
-      - image: circleci/postgres:11.2-alpine-postgis-ram
 
 commands:
   bundle_install:

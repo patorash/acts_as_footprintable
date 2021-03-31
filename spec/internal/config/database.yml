@@ -1,7 +1,5 @@
 test:
-  adapter: postgresql
-  encoding: unicode
-  user: postgres
-  host: localhost
-  database: acts_as_footprintable
-  min_messages: WARNING
+  adapter: sqlite3
+  database: test.sqlite3
+  pool: 5
+  timeout: 5000
