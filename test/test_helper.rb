@@ -1,4 +1,13 @@
-# coding: utf-8
+require 'minitest/autorun'
+require 'active_record'
+
+require 'database_cleaner/active_record'
+require "acts_as_footprintable"
+require 'timecop'
+
+Dir["#{Dir.pwd}/test/internal/app/models/*.rb"].each(&method(:require))
+
+ActiveRecord::Base.establish_connection('adapter' => 'sqlite3', 'database' => ':memory:')
 ActiveRecord::Schema.define do
   create_table :footprints, :force => true do |t|
     t.references :footprintable, :polymorphic => true
@@ -27,5 +36,18 @@ ActiveRecord::Schema.define do
 
   create_table :not_footprintables, :force => true do |t|
     t.string :name
+  end
+end
+
+DatabaseCleaner.strategy = :transaction
+
+class Minitest::Spec
+
+  before :each do
+    DatabaseCleaner.start
+  end
+
+  after :each do
+    DatabaseCleaner.clean
   end
 end

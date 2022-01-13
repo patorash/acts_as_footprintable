@@ -1,13 +1,14 @@
+require 'test_helper'
 require 'acts_as_footprintable/footprintable'
 
-RSpec.describe ActsAsFootprintable::Footprintable, type: :model do
+describe ActsAsFootprintable::Footprintable do
 
   it "should not be a footprintable" do
-    expect(NotFootprintable).not_to be_footprintable
+    expect(NotFootprintable).wont_be :footprintable?
   end
 
   it "should be a footprintable" do
-    expect(Footprintable).to be_footprintable
+    expect(Footprintable).must_be :footprintable?
   end
 
   describe 'leave footprints by footprinter' do
@@ -17,26 +18,26 @@ RSpec.describe ActsAsFootprintable::Footprintable, type: :model do
     let(:footprintable2) { Footprintable.create!(:name => 'a 2nd footprinting model') }
 
     it "should be leave footprints" do
-      expect(footprintable.leave_footprints(user)).to be_truthy
+      expect(footprintable.leave_footprints(user)).must_equal true
     end
 
     it "足跡の数が増えていること" do
-      expect {
-        footprintable.leave_footprints user
-      }.to change { footprintable.footprint_count }.from(0).to(1)
+      expect(footprintable.footprint_count).must_equal 0
+      footprintable.leave_footprints user
+      expect(footprintable.footprint_count).must_equal 1
     end
 
     it "10回アクセスしたら10になること" do
-      expect {
-        10.times { footprintable.leave_footprints user }
-      }.to change { footprintable.footprint_count }.from(0).to(10)
+      expect(footprintable.footprint_count).must_equal 0
+      10.times { footprintable.leave_footprints user }
+      expect(footprintable.footprint_count).must_equal 10
     end
 
     it "複数人でアクセスしたら合計されること" do
-      expect {
-        5.times { footprintable.leave_footprints user }
-        5.times { footprintable.leave_footprints user2 }
-      }.to change { footprintable.footprint_count }.from(0).to(10)
+      expect(footprintable.footprint_count).must_equal 0
+      5.times { footprintable.leave_footprints user }
+      5.times { footprintable.leave_footprints user2 }
+      expect(footprintable.footprint_count).must_equal 10
     end
 
     describe "期間指定をする" do
@@ -48,18 +49,18 @@ RSpec.describe ActsAsFootprintable::Footprintable, type: :model do
         end
       end
 
-      context "1週間の場合" do
+      describe "1週間の場合" do
         it "35の足跡があること" do
           Timecop.travel(Time.parse("2013-09-30 10:00:00")) do
-            expect(footprintable.footprint_count_between(1.week.ago..Time.now)).to eq 35
+            expect(footprintable.footprint_count_between(1.week.ago..Time.now)).must_equal 35
           end
         end
       end
 
-      context "1ヶ月の場合" do
+      describe "1ヶ月の場合" do
         it "150の足跡があること" do
           Timecop.travel(Time.parse("2013-09-30 10:00:00")) do
-            expect(footprintable.footprint_count_between(1.month.ago..Time.now)).to eq 150
+            expect(footprintable.footprint_count_between(1.month.ago..Time.now)).must_equal 150
           end
         end
       end
@@ -69,7 +70,7 @@ RSpec.describe ActsAsFootprintable::Footprintable, type: :model do
   describe "アクセスランキングを作成" do
     let(:user) { User.create!(:name => 'i can footprint!') }
 
-    context "件数と期間を制限" do
+    describe "件数と期間を制限" do
       before do
         (1..30).each do |index|
           Timecop.travel(Time.parse("2013-09-#{index}")) do
@@ -82,9 +83,13 @@ RSpec.describe ActsAsFootprintable::Footprintable, type: :model do
         month = Time.new(2013, 9, 1)
         Footprintable.access_ranking(month.beginning_of_month...1.week.since(month), 5)
       end
-      it { is_expected.to eq ({ 7 => 7, 6 => 6, 5 => 5, 4 => 4, 3 => 3 }) }
+
+      it 'アクセスランキングが取得できること' do
+        expect(subject).must_equal ({ 7 => 7, 6 => 6, 5 => 5, 4 => 4, 3 => 3 })
+      end
+
       it '5件取得できること' do
-        expect(subject.count).to eq 5
+        expect(subject.count).must_equal 5
       end
     end
   end

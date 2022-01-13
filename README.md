@@ -92,10 +92,7 @@ post_access_histories = @user.access_histories_for(Post, 10)
 
 ## Testing
 
-All tests follow the RSpec format and located in the spec directory.
-They can be run with:
-
-    $ rake spec
+    $ bundle exec rake
 
 ## Contributing
 
