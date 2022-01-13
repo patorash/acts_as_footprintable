@@ -1,10 +1,9 @@
-## coding: utf-8
 require 'rubygems'
 require 'bundler/setup'
 require 'combustion'
 require 'database_cleaner/active_record'
+require 'acts_as_footprintable'
 require 'timecop'
-require 'pry'
 
 Combustion.initialize! :active_record
 

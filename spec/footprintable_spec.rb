@@ -1,3 +1,5 @@
+require 'acts_as_footprintable/footprintable'
+
 RSpec.describe ActsAsFootprintable::Footprintable, type: :model do
 
   it "should not be a footprintable" do
