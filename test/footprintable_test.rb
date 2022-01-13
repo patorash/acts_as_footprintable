@@ -4,7 +4,6 @@ require 'test_helper'
 require 'acts_as_footprintable/footprintable'
 
 describe ActsAsFootprintable::Footprintable do
-
   it "should not be a footprintable" do
     expect(NotFootprintable).wont_be :footprintable?
   end

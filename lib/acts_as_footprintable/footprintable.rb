@@ -2,7 +2,6 @@
 
 module ActsAsFootprintable
   module Footprintable
-
     def self.included(base)
       base.class_eval do
         has_many :footprints, class_name: 'ActsAsFootprintable::Footprint', as: :footprintable, dependent: :destroy do

@@ -4,7 +4,6 @@ require 'test_helper'
 require 'acts_as_footprintable/footprinter'
 
 describe ActsAsFootprintable::Footprinter do
-
   it "should not be a footprinter" do
     expect(NotUser).wont_be :footprinter?
   end
@@ -29,12 +28,20 @@ describe ActsAsFootprintable::Footprinter do
     describe "対象のモデル毎に" do
       it "取得できること" do
         expect(user_1.access_histories_for(Footprintable).count).must_equal 5
-        expect(user_1.access_histories_for(Footprintable).map { |footprint| footprint.footprintable.name }).must_equal (1..5).to_a.reverse.map { |index| "footprintable#{index}" }
+        expect(user_1.access_histories_for(Footprintable).map { |footprint|
+                 footprint.footprintable.name
+               }).must_equal (1..5).to_a.reverse.map { |index|
+                               "footprintable#{index}"
+                             }
       end
 
       it "件数を絞り込めること" do
         expect(user_1.access_histories_for(Footprintable, 3).count).must_equal 3
-        expect(user_1.access_histories_for(Footprintable, 3).map { |footprint| footprint.footprintable.name }).must_equal (3..5).to_a.reverse.map { |index| "footprintable#{index}" }
+        expect(user_1.access_histories_for(Footprintable, 3).map { |footprint|
+                 footprint.footprintable.name
+               }).must_equal (3..5).to_a.reverse.map { |index|
+                               "footprintable#{index}"
+                             }
       end
     end
 
