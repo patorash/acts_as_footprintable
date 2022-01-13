@@ -7,7 +7,7 @@ module ActsAsFootprintable
         false
       end
 
-      def acts_as_footprinter(*args)
+      def acts_as_footprinter(*_args)
         require 'acts_as_footprintable/footprinter'
         include ActsAsFootprintable::Footprinter
 

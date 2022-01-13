@@ -1,4 +1,5 @@
-# coding: utf-8
+# frozen_string_literal: true
+
 class NotFootprintable < ActiveRecord::Base
-  validates :name, :presence => true
+  validates :name, presence: true
 end
