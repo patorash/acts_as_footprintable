@@ -6,22 +6,22 @@ module ActsAsFootprintable
   class MigrationGenerator < Rails::Generators::Base
     include Rails::Generators::Migration
 
-    desc "Generators migration for footprintable(footprints table)"
+    desc 'Generators migration for footprintable(footprints table)'
 
     def self.orm
       Rails::Generators.options[:rails][:orm]
     end
 
     def self.source_root
-      File.join(File.dirname(__FILE__), 'templates', (orm.to_s unless orm.class.eql?(String)))
+      File.join(File.dirname(__FILE__), 'templates', (orm.to_s unless orm.instance_of?(String)))
     end
 
     def self.orm_has_migration?
       [:active_record].include? orm
     end
 
-    def self.next_migration_number(path)
-      Time.now.utc.strftime("%Y%m%d%H%M%S")
+    def self.next_migration_number(_path)
+      Time.now.utc.strftime('%Y%m%d%H%M%S')
     end
 
     def create_migration_file
@@ -32,9 +32,7 @@ module ActsAsFootprintable
     end
 
     def migration_version
-      if over_rails5?
-        "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
-      end
+      "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]" if over_rails5?
     end
 
     def over_rails5?

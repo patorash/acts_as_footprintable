@@ -1,7 +1,9 @@
-require "bundler/gem_tasks"
+# frozen_string_literal: true
+
+require 'bundler/gem_tasks'
 require 'rake/testtask'
 
-task :default => [:test]
+task default: [:test]
 
 Rake::TestTask.new do |test|
   test.libs << 'lib'

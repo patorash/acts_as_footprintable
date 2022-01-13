@@ -1,4 +1,4 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 class User < ActiveRecord::Base
   acts_as_footprinter

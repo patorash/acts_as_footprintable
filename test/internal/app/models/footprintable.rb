@@ -1,6 +1,6 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 class Footprintable < ActiveRecord::Base
   acts_as_footprintable
-  validates :name, :presence => true
+  validates :name, presence: true
 end
