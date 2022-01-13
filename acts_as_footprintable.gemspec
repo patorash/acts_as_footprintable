@@ -20,6 +20,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'timecop', '~> 0'
   spec.add_development_dependency 'database_cleaner', '~> 2.0'
 end

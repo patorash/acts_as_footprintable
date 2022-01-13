@@ -45,7 +45,7 @@ describe ActsAsFootprintable::Footprintable do
     describe "期間指定をする" do
       before do
         (1..30).each do |day|
-          Timecop.travel(Time.parse("2013-09-#{day}")) do
+          travel_to Time.parse("2013-09-#{day}") do
             5.times { footprintable.leave_footprints user }
           end
         end
@@ -53,7 +53,7 @@ describe ActsAsFootprintable::Footprintable do
 
       describe "1週間の場合" do
         it "35の足跡があること" do
-          Timecop.travel(Time.parse("2013-09-30 10:00:00")) do
+          travel_to Time.parse("2013-09-30 10:00:00") do
             expect(footprintable.footprint_count_between(1.week.ago..Time.now)).must_equal 35
           end
         end
@@ -61,7 +61,7 @@ describe ActsAsFootprintable::Footprintable do
 
       describe "1ヶ月の場合" do
         it "150の足跡があること" do
-          Timecop.travel(Time.parse("2013-09-30 10:00:00")) do
+          travel_to Time.parse("2013-09-30 10:00:00") do
             expect(footprintable.footprint_count_between(1.month.ago..Time.now)).must_equal 150
           end
         end
@@ -75,7 +75,7 @@ describe ActsAsFootprintable::Footprintable do
     describe "件数と期間を制限" do
       before do
         (1..30).each do |index|
-          Timecop.travel(Time.parse("2013-09-#{index}")) do
+          travel_to Time.parse("2013-09-#{index}") do
             footprintable = Footprintable.create!(:name => "Footprintable#{index}")
             index.times { footprintable.leave_footprints user }
           end
