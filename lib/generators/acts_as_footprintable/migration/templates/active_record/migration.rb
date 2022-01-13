@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ActsAsFootprintableMigration < ActiveRecord::Migration<%= migration_version %>
   def self.up
     create_table :footprints do |t|

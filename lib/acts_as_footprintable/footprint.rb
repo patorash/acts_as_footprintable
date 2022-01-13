@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActsAsFootprintable
   class Footprint < ::ActiveRecord::Base
     belongs_to :footprintable, polymorphic: true
