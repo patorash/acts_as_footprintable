@@ -14,11 +14,13 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Rails gem to allowing records to leave footprints'
   spec.homepage      = 'https://github.com/patorash/acts_as_footprintable'
   spec.license       = 'MIT'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
+  spec.required_ruby_version = '>= 2.6'
 
   spec.add_dependency 'activerecord', '< 7.1.0', '>= 5.0.0'
   spec.add_development_dependency 'database_cleaner', '~> 2.0'

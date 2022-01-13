@@ -25,10 +25,11 @@ module ActsAsFootprintable
     end
 
     def create_migration_file
-      if self.class.orm_has_migration?
-        migration_template 'migration.rb', 'db/migrate/acts_as_footprintable_migration.rb',
-                           migration_version: migration_version
-      end
+      return unless self.class.orm_has_migration?
+
+      migration_template 'migration.rb',
+                         'db/migrate/acts_as_footprintable_migration.rb',
+                         migration_version: migration_version
     end
 
     def migration_version

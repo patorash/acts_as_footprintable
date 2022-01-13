@@ -1,0 +1,32 @@
+require:
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-minitest
+
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.6
+  Exclude:
+    - 'lib/generators/acts_as_footprintable/migration/templates/active_record/migration.rb'
+
+Layout/LineLength:
+  AllowHeredoc: true
+  AllowURI: true
+
+Metrics/MethodLength:
+  IgnoredMethods:
+    - acts_as_footprintable
+    - recent_footprint_ids
+
+Metrics/BlockLength:
+  IgnoredMethods:
+    - describe
+    - refine
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Style/Documentation:
+  Enabled: false
