@@ -1,5 +1,4 @@
 # ActsAsFootprintable
-[![CircleCI](https://circleci.com/gh/patorash/acts_as_footprintable.svg?style=svg)](https://circleci.com/gh/patorash/acts_as_footprintable)
 
 Acts As Footprintable is a Ruby Gem specifically written for Rails/ActiveRecord models.
 The main goals of this gem are:
