@@ -3,8 +3,6 @@ require:
   - rubocop-rake
   - rubocop-minitest
 
-inherit_from: .rubocop_todo.yml
-
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.6
