@@ -31,4 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-performance', '~> 1.13'
   spec.add_development_dependency 'rubocop-rake', '~> 0.6'
   spec.add_development_dependency 'sqlite3', '~> 1.3'
+  spec.add_development_dependency 'mutex_m', '~> 0.1'
+  spec.add_development_dependency 'bigdecimal', '~> 3.0'
+  spec.add_development_dependency 'base64', '~> 0.1'
 end
