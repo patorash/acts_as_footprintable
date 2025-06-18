@@ -3,7 +3,8 @@
 require 'minitest/autorun'
 require 'active_record'
 require 'active_support/testing/time_helpers'
-require 'database_cleaner/active_record'
+# database_cleaner 1～2系のどちらでも動くようにするため、パスを修正
+require 'database_cleaner'
 require 'acts_as_footprintable'
 
 Dir["#{Dir.pwd}/test/internal/app/models/*.rb"].sort.each { |f| require f }
