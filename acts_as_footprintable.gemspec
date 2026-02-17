@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 2.6'
 
-  spec.add_dependency 'activerecord', '< 7.2.0', '>= 5.0.0'
+  spec.add_dependency 'activerecord', '< 8.2.0', '>= 5.2.0'
   spec.add_development_dependency 'concurrent-ruby', '1.3.4'
   spec.add_development_dependency 'database_cleaner', '< 3.0', '>= 1.99.0'
   spec.add_development_dependency 'rake', '~> 13.0'
@@ -34,4 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'mutex_m', '~> 0.1'
   spec.add_development_dependency 'bigdecimal', '~> 3.0'
   spec.add_development_dependency 'base64', '~> 0.1'
+  spec.add_development_dependency 'logger', '~> 1.0'
+  spec.add_development_dependency 'benchmark', '~> 0.1'
 end
